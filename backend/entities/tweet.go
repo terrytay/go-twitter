@@ -2,6 +2,7 @@ package entities
 
 type Tweet struct {
 	Id        string
+	UserId    string
 	Message   string
 	Timestamp int64
 }

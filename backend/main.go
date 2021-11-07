@@ -6,6 +6,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/terrytay/twitter/backend/infrastructures/db"
+	"github.com/terrytay/twitter/backend/internal"
 )
 
 func main() {
@@ -17,18 +18,24 @@ func main() {
 	loadEnv(l)
 
 	// Initialize database
-	firebase, err := db.NewFirebase(l)
-	if err != nil {
-		l.Fatal(err)
-	}
-	db := db.NewDatabase(firebase)
-	l.Println("[MAIN]", "Database connection established")
+	db := loadDB(l)
 	defer db.Client.Close()
 
+	internal.InitApp(db)
 }
 
 func loadEnv(l *log.Logger) {
 	if err := godotenv.Load(".env"); err != nil {
 		l.Fatal(err)
 	}
+}
+
+func loadDB(l *log.Logger) *db.Database {
+	firebase, err := db.NewFirebase(l)
+	if err != nil {
+		l.Fatal(err)
+	}
+	db := db.NewDatabase(firebase)
+	l.Println("[MAIN]", "Database connection established")
+	return db
 }
