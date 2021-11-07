@@ -21,7 +21,7 @@ func main() {
 	db := loadDB(l)
 	defer db.Client.Close()
 
-	internal.InitApp(db)
+	internal.InitApp(db, l)
 }
 
 func loadEnv(l *log.Logger) {

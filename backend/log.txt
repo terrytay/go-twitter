@@ -2,6 +2,5 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] POST   /user/                    --> github.com/terrytay/twitter/backend/handlers.(*UserHandler).post-fm (1 handlers)
-[GIN-debug] Listening and serving HTTP on :9000
+[GIN-debug] POST   /user/                    --> github.com/terrytay/twitter/backend/handlers.(*UserHandler).post-fm (2 handlers)
 [GIN-debug] redirecting request 307: /user/ --> /user/

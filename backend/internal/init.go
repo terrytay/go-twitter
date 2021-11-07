@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -40,7 +41,7 @@ func getHandlers(services *Services) *[]Handler {
 	}
 }
 
-func InitApp(db *db.Database) {
+func InitApp(db *db.Database, l *log.Logger) {
 	repos := getRepositories(db)
 	services := getServices(repos)
 	handlers := getHandlers(services)
@@ -48,5 +49,5 @@ func InitApp(db *db.Database) {
 	app := Initialize(handlers)
 	port := os.Getenv("PORT")
 
-	app.Start(port)
+	app.Start(port, l)
 }
