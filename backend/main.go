@@ -17,8 +17,12 @@ func main() {
 	loadEnv(l)
 
 	// Initialize database
-	firebase := db.NewFirebase()
-	db := db.NewDatabase(l, firebase)
+	firebase, err := db.NewFirebase(l)
+	if err != nil {
+		l.Fatal(err)
+	}
+	db := db.NewDatabase(firebase)
+	l.Println("[MAIN]", "Database connection established")
 	defer db.Client.Close()
 
 }
